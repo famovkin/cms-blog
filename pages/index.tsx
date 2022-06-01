@@ -1,9 +1,10 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
+import { IHome, IHomeFields } from "../contentful"
 
-import client from "../contentful"
+import client from "../contentful/index"
 
-const Home = ({ home }: { home: any }) => {
+const Home = ({ home }: { home: IHome }) => {
 
   return (
     <div>
@@ -24,7 +25,7 @@ const Home = ({ home }: { home: any }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const home = await client.getEntries({
+  const home = await client.getEntries<IHomeFields>({
     content_type: 'home',
     limit: 1,
   });
